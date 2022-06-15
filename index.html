@@ -4,6 +4,29 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
     <title>xunlu</title>
+	public class CountServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		
+		int totalCount=1;//默认访问量为1
+		
+		//获取网站访问量
+		
+		Object count = request.getServletContext().getAttribute("count");
+	   //判断count是否为null，不为null表示曾经访问过，直接将count赋值给totalCount
+		if(count!=null) {
+			totalCount=(int)count;
+		}
+		
+		//访问次数累加
+		request.getServletContext().setAttribute("count",totalCount+1);
+		response.getWriter().println("网站访问量为："+totalCount);	//输出到界面
+		
+	}
+
+}
 <style type="text/css">
 #tx{
 	margin:2% auto;
@@ -88,5 +111,6 @@
 <span class="border-right"></span>
 <span class="border-bottom"></span>
     <embed frameborder="no" border="0" marginwidth="0" marginheight="0" width=0 height=0 src="//music.163.com/outchain/player?type=0&id=4950890732&auto=1&height=0"></embed>
-</body>
+<h2><a href="CountServlet">点我查看网站访问量</a></h2>
+	</body>
 </html>
