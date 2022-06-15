@@ -83,5 +83,17 @@
 	<span class="border-left"></span>
 	<span class="border-right"></span>
 	<span class="border-bottom"></span>
+		<%
+		Object obj =application.getAttribute("counter");
+		if(obj==null){
+		    application.setAttribute("counter", new Integer(1));
+		    out.print("该页面已被访问1次！");
+		}else{
+		    int count=Integer.parseInt(obj.toString());
+		    count++;
+		    out.print("该页面已被访问了"+count+"次！");
+		    application.setAttribute("counter", count);
+		}
+		%>
 </body>
 </html>
